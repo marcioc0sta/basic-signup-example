@@ -82,7 +82,7 @@ const UserInfo = () => {
         </InputContainer>
         <SbmtContainer>
           <FeedbackText />
-          <button type="submit">Salvar</button>
+          <button type="submit">Save</button>
         </SbmtContainer>
       </Form>
     </>

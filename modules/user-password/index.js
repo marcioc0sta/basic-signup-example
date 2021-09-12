@@ -56,7 +56,7 @@ const UserPassword = () => {
         </InputContainer>
         <SbmtContainer>
           <FeedbackText />
-          <button type="submit">Enviar</button>
+          <button type="submit">Send</button>
         </SbmtContainer>
       </Form>
     </>
