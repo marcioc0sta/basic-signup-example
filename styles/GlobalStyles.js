@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&display=swap');
 
   * {
     box-sizing: border-box;
@@ -17,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: var(--white);
-    font: 16px Roboto;
+    font-family: 'Roboto', sans-serif;
   }
 
   input.hide-clear[type=search]::-ms-clear,
