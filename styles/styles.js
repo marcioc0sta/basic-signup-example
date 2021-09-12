@@ -35,3 +35,9 @@ export const InputContainer = styled.div`
   margin: 12px 0;
   flex: 1;
 `
+
+export const SbmtContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`

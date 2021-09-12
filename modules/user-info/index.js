@@ -1,15 +1,41 @@
 import Title from "../../components/Title";
 import {useFormik} from "formik";
-import {Form, Input, InputContainer, Label} from "../../styles/styles";
+import {Form, Input, InputContainer, Label, SbmtContainer} from "../../styles/styles";
+import { useContext } from "react";
+import { UiContext } from "../../context/ui-context";
+import axios from "axios";
+import {useRouter} from "next/router";
 
 const UserInfo = () => {
+  const { uiState, setUiState } = useContext(UiContext)
+  const { push } = useRouter()
+
+  const onSubmit = async (formData) => {
+    const { data: users } = await axios.get('http://localhost:3001/users')
+    const emailAlreadyExists = users.some(item => item.email === formData.email)
+
+    if (emailAlreadyExists) {
+      setUiState({
+        feedback: 'Email already exists, please choose another one',
+        showFeedback: true
+      })
+      return
+    }
+
+    console.log('update redux state')
+    await push('/password', undefined, { shallow: true })
+  }
+
+
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       username: '',
       email: '',
       nickname: '@'
-    }
+    },
+    onSubmit,
   })
+
   return (
     <>
       <Title text='User info' />
@@ -44,6 +70,12 @@ const UserInfo = () => {
             type="text"
           />
         </InputContainer>
+        <SbmtContainer>
+          {uiState.showFeedback && (
+            <p>{uiState.feedback}</p>
+          )}
+          <button type="submit">Salvar</button>
+        </SbmtContainer>
       </Form>
     </>
   )
