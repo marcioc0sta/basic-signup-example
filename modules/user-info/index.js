@@ -3,17 +3,20 @@ import {useFormik} from "formik";
 import {Form, Input, InputContainer, Label, SbmtContainer} from "../../styles/styles";
 import { useContext } from "react";
 import {FEEDBACK_TYPES, UiContext} from "../../context/ui-context";
-import axios from "axios";
 import {useRouter} from "next/router";
 import FeedbackText from "../../components/FeedbackText";
+import {noDataHasBeenSent, userAlreadyExists} from "./verify-user";
 
 const UserInfo = () => {
   const { setUiState } = useContext(UiContext)
   const { push } = useRouter()
 
   const onSubmit = async (formData) => {
-    const { data: users } = await axios.get('http://localhost:3001/users')
-    const emailAlreadyExists = users.some(item => item.email === formData.email)
+    if (noDataHasBeenSent(formData)) {
+      return
+    }
+
+    const emailAlreadyExists = await userAlreadyExists(formData.email)
 
     if (emailAlreadyExists) {
       setUiState({

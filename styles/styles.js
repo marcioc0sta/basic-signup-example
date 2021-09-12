@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   border-radius: 8px;
-  box-shadow: 4px 4px 4px #cdcdcd;
+  box-shadow: 0 0 18px #cdcdcd;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
