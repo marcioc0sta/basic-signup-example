@@ -13,6 +13,11 @@ const UserInfo = () => {
 
   const onSubmit = async (formData) => {
     if (noDataHasBeenSent(formData)) {
+      setUiState({
+        feedback: 'Please, add at least Username and Email',
+        showFeedback: true,
+        feedbackType: FEEDBACK_TYPES.BAD
+      })
       return
     }
 
