@@ -1,7 +1,10 @@
-import Title from "../components/Title";
-
-
+import UserInfo from "../modules/user-info";
+import { Container } from "../styles/styles";
 
 export default function Home() {
-  return <Title text='Basic Signup' />
+  return (
+    <Container>
+      <UserInfo />
+    </Container>
+  )
 }
