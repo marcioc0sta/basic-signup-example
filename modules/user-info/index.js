@@ -32,7 +32,7 @@ const UserInfo = () => {
       return
     }
 
-    console.log('update redux state')
+    //TODO: update redux state
     await push('/password', undefined, { shallow: true })
   }
 
