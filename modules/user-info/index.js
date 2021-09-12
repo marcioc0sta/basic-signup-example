@@ -5,9 +5,10 @@ import { useContext } from "react";
 import { UiContext } from "../../context/ui-context";
 import axios from "axios";
 import {useRouter} from "next/router";
+import FeedbackText from "../../components/FeedbackText";
 
 const UserInfo = () => {
-  const { uiState, setUiState } = useContext(UiContext)
+  const { setUiState } = useContext(UiContext)
   const { push } = useRouter()
 
   const onSubmit = async (formData) => {
@@ -71,9 +72,7 @@ const UserInfo = () => {
           />
         </InputContainer>
         <SbmtContainer>
-          {uiState.showFeedback && (
-            <p>{uiState.feedback}</p>
-          )}
+          <FeedbackText />
           <button type="submit">Salvar</button>
         </SbmtContainer>
       </Form>

@@ -39,5 +39,6 @@ export const InputContainer = styled.div`
 export const SbmtContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-top: 30px;
   width: 100%;
 `
