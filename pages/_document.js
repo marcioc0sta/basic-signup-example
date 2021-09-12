@@ -1,5 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import GlobalStyle from "../styles/GlobalStyles";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -37,6 +38,7 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
         </Head>
         <body>
+        <GlobalStyle />
         <Main />
         <NextScript />
         </body>

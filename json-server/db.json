@@ -3,7 +3,7 @@
     {
       "username": "test",
       "email": "test@test.com.br",
-      "@": "johnDoe",
+      "handle": "johnDoe",
       "password": "123456"
     }
   ]
