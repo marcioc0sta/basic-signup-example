@@ -2,7 +2,7 @@ import Title from "../../components/Title";
 import {useFormik} from "formik";
 import {Form, Input, InputContainer, Label, SbmtContainer} from "../../styles/styles";
 import { useContext } from "react";
-import { UiContext } from "../../context/ui-context";
+import {FEEDBACK_TYPES, UiContext} from "../../context/ui-context";
 import axios from "axios";
 import {useRouter} from "next/router";
 import FeedbackText from "../../components/FeedbackText";
@@ -18,7 +18,8 @@ const UserInfo = () => {
     if (emailAlreadyExists) {
       setUiState({
         feedback: 'Email already exists, please choose another one',
-        showFeedback: true
+        showFeedback: true,
+        feedbackType: FEEDBACK_TYPES.BAD
       })
       return
     }
