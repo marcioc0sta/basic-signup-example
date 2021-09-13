@@ -27,7 +27,6 @@ const UserInfo = () => {
     }
 
     const { email, username, nickname: handle } = formData
-
     const emailAlreadyExists = await userAlreadyExists(email)
 
     if (emailAlreadyExists) {

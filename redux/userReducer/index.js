@@ -1,14 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import axios from "axios";
+
+export const USER_STATUSES = {
+  IDLE: "idle",
+  SUCCESS: "success",
+  FAILED: "failed"
+}
 
 const initialState = {
   username: "",
   email: "",
   handle: "@",
-  password: ""
+  status: USER_STATUSES.IDLE
 }
 
+export const sendUserToApi = createAsyncThunk(
+  'user/client/sendUserToApi',
+  async (userInfo) => {
+    const response = await axios.post('http://localhost:3001/users', userInfo)
+    return response.status
+  }
+)
+
 export const userSlice = createSlice({
-  name: 'user',
+  name: 'user/client',
   initialState,
   reducers: {
     updateUserState: (state, action) => {
@@ -17,7 +32,14 @@ export const userSlice = createSlice({
       state.handle = action.payload.handle
     }
   },
-  extraReducers: {}
+  extraReducers: {
+    [sendUserToApi.fulfilled]: state => {
+      state.status = USER_STATUSES.SUCCESS
+    },
+    [sendUserToApi.rejected]: state => {
+      state.status = USER_STATUSES.FAILED
+    }
+  }
 })
 
 export const { updateUserState } = userSlice.actions
