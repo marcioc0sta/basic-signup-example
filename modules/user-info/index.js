@@ -6,10 +6,15 @@ import {FEEDBACK_TYPES, UiContext} from "../../context/ui-context";
 import {useRouter} from "next/router";
 import FeedbackText from "../../components/FeedbackText";
 import {noDataHasBeenSent, userAlreadyExists} from "./verify-user";
+import {updateUserState} from "../../redux/userReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 const UserInfo = () => {
   const { setUiState } = useContext(UiContext)
   const { push } = useRouter()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
 
   const onSubmit = async (formData) => {
     if (noDataHasBeenSent(formData)) {
@@ -21,7 +26,9 @@ const UserInfo = () => {
       return
     }
 
-    const emailAlreadyExists = await userAlreadyExists(formData.email)
+    const { email, username, nickname: handle } = formData
+
+    const emailAlreadyExists = await userAlreadyExists(email)
 
     if (emailAlreadyExists) {
       setUiState({
@@ -32,17 +39,24 @@ const UserInfo = () => {
       return
     }
 
-    //TODO: update redux state
+    dispatch(updateUserState({
+      username,
+      email,
+      handle,
+    }))
+
     await push('/password', undefined, { shallow: true })
+  }
+
+  const initialValues = {
+    username: user.username,
+    email: user.email,
+    nickname: user.handle
   }
 
 
   const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      username: '',
-      email: '',
-      nickname: '@'
-    },
+    initialValues,
     onSubmit,
   })
 
